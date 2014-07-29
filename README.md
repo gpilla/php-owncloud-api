@@ -1,5 +1,7 @@
 # Object Oriented PHP Owncloud API (php-owncloud-api)
 
+[![Build Status](https://travis-ci.org/gpilla/php-owncloud-api.svg?branch=master)](https://travis-ci.org/gpilla/php-owncloud-api)
+
 An object oriented API to consume from PHP. The idea of this API is to manage all the files
 download, upload and sharing.
 
