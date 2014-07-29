@@ -34,7 +34,10 @@ $share = $api->fileSharing()->getShare(1);
 
 ```php
 $api = new Api('http://somewhere.com', ['user', 'password']);
-$share = $api->fileSharing()->createNewShare('path/to/file/or/folder', ['shareType' => Owncloud\Api\FileSharing::SHARE_TYPE_PUBLIC_LINK]);
+$share = $api->fileSharing()->createNewShare(
+    'path/to/file/or/folder'
+    , ['shareType' => Owncloud\Api\FileSharing::SHARE_TYPE_PUBLIC_LINK]
+);
 ```
 
 ### Delete a share
