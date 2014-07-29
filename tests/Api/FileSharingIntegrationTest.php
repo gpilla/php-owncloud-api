@@ -8,13 +8,16 @@ use GuzzleHttp\Message\Response;
 
 use Owncloud\Api\FileSharing;
 
+/**
+ * @coversDefaultClass Owncloud\Api\FileSharing
+ */
 class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 {
     protected $_api;
 
     public function setUp()
     {
-        $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], [$_SERVER['owncloud_user'], $_SERVER['owncloud_password']]);
+        $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], $_SERVER['owncloud_user'], $_SERVER['owncloud_password']);
     }
 
     public function createAndGetShareId()
@@ -26,6 +29,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::createNewShare
      */
     public function testCreateNewShare()
     {
@@ -39,6 +43,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::createNewShare
      * @expectedException        Owncloud\ResponseException
      */
     public function testCreateNewShareWithIncorrectDirectoryOrFileShouldFail()
@@ -48,6 +53,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::getShare
      */
     public function testGetShare()
     {
@@ -64,6 +70,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::getShare
      * @expectedException        Owncloud\ResponseException
      */
     public function testGetShareWithWrongShareIdShouldFail()
@@ -73,6 +80,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::getAllShares
      */
     public function testGetAllShares()
     {
@@ -85,6 +93,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::deleteShare
      */
     public function testDeleteShare()
     {
@@ -96,6 +105,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group internet
+     * @covers                   Owncloud\Api\FileSharing::deleteShare
      * @expectedException        Owncloud\ResponseException
      */
     public function testDeleteShareWithWrongShareIdShouldFail()
