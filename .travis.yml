@@ -10,5 +10,5 @@ before_script:
   - composer install -dev
 
 script:
-  - ./vendor/bin/phpunit
+  - ./vendor/bin/phpunit --exclude-group internet
   - ./vendor/bin/phpcs --standard=PSR1 --standard=PSR2 -np src/
