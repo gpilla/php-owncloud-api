@@ -6,14 +6,16 @@ class Api
 {
     private $client;
 
-    public function __construct($host, $auth)
+    public function __construct($host, $auth, $config = array())
     {
-        $this->client = new Client([
-            'base_url' => $host,
-            'defaults' => [
-                'auth' => $auth
-            ]
-        ]);
+        $config['base_url'] = $host;
+        $config['defaults']['auth'] = $auth;
+        $this->client = new Client($config);
+    }
+
+    public function getClient()
+    {
+        return $this->client;
     }
 
     public function fileSharing()
