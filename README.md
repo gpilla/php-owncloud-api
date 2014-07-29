@@ -16,6 +16,7 @@ Through composer, simply run :
 ```bash
 $ php composer.phar require gpilla/php-owncloud-api:dev-master
 ```
+Or edit your composer.json:
 
 ```json
 // composer.json
