@@ -17,6 +17,13 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
         $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], [$_SERVER['owncloud_user'], $_SERVER['owncloud_password']]);
     }
 
+    public function createAndGetShareId()
+    {
+        // In case of integration test, de file test.txt should existe in the root of the filesystem
+        $response = $this->_api->fileSharing()->createNewShare('test.txt', ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
+        return $response['id'];
+    }
+
     /**
      * @group internet
      */
@@ -36,13 +43,44 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateNewShareWithIncorrectDirectoryOrFileShouldFail()
     {
-        $response = $this->_api->fileSharing()->createNewShare('non/existing/path', ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
+        $this->_api->fileSharing()->createNewShare('non/existing/path', ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
     }
 
-    public function getShareIdForDelete()
+    /**
+     * @group internet
+     */
+    public function testGetShare()
     {
-        $response = $this->_api->fileSharing()->createNewShare('test.txt', ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
-        return $response['id'];
+        $shareId = $this->createAndGetShareId();
+
+        $response = $this->_api->fileSharing()->getShare($shareId);
+
+        $this->assertArrayHasKey('id', $response);
+        $this->assertArrayHasKey('path', $response);
+        $this->assertArrayHasKey('token', $response);
+        $this->assertArrayHasKey('item_type', $response);
+        $this->assertCount(16, $response);
+    }
+
+    /**
+     * @group internet
+     * @expectedException        Owncloud\ResponseException
+     */
+    public function testGetShareWithWrongShareIdShouldFail()
+    {
+        $this->_api->fileSharing()->getShare(0);
+    }
+
+    /**
+     * @group internet
+     */
+    public function testGetAllShares()
+    {
+        $this->createAndGetShareId(); // We create at least one.
+
+        $response = $this->_api->fileSharing()->getAllShares();
+
+        $this->assertGreaterThan(0, count($response));
     }
 
     /**
@@ -50,7 +88,7 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
      */
     public function testDeleteShare()
     {
-        $shareId = $this->getShareIdForDelete();
+        $shareId = $this->createAndGetShareId(); // We create at least one.
 
         $response = $this->_api->fileSharing()->deleteShare($shareId);
         $this->assertCount(0, $response);

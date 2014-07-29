@@ -41,7 +41,9 @@ class FileSharing
             throw new ResponseException($response->getErrorMessage());
         }
 
-        return $response->getData();
+        $response = $response->getData();
+
+        return $response;
     }
 
     public function getShare($shareId)
@@ -54,7 +56,12 @@ class FileSharing
             throw new ResponseException($response->getErrorMessage());
         }
 
-        return $response->getData();
+        $data = $response->getData();
+        if (!isset($data['element'])) {
+            throw new Owncloud\ResponseException('No element on response');
+        }
+
+        return $data['element'];
     }
 
     public function createNewShare($path, $options)

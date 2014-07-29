@@ -42,7 +42,16 @@ class Response
 
     public function getErrorMessage()
     {
-        return "Code: {$this->getStatusCode()} : {$this->getMessage()}";
+        $message = '';
+        if ($this->getStatusCode() != '') {
+            $message .= "Code: {$this->getStatusCode()} : ";
+        }
+        if ($this->getMessage() != '') {
+            $message .= $this->getMessage();
+        } else {
+            return 'Not expected response from webservice';
+        }
+        return $message;
     }
 
     public function getData()
