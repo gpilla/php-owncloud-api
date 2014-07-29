@@ -25,7 +25,8 @@ class Client extends \GuzzleHttp\Client
         return new Response($data);
     }
 
-    public function delete($uri = null, array $options = array()) {
+    public function delete($uri = null, array $options = array())
+    {
         $data = parent::delete($uri, $options)->json();
         return new Response($data);
     }
