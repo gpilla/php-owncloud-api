@@ -1,6 +1,7 @@
-# Object Oriented PHP Owncloud API (php-owncloud-api)
+# Object Oriented PHP Owncloud API
 
 [![Build Status](https://travis-ci.org/gpilla/php-owncloud-api.svg?branch=master)](https://travis-ci.org/gpilla/php-owncloud-api)
+[![Coverage Status](https://coveralls.io/repos/gpilla/php-owncloud-api/badge.png)](https://coveralls.io/r/gpilla/php-owncloud-api)
 [![Latest Stable Version](https://poser.pugx.org/gpilla/php-owncloud-api/v/stable.svg)](https://packagist.org/packages/gpilla/php-owncloud-api) [![Total Downloads](https://poser.pugx.org/gpilla/php-owncloud-api/downloads.svg)](https://packagist.org/packages/gpilla/php-owncloud-api) [![Latest Unstable Version](https://poser.pugx.org/gpilla/php-owncloud-api/v/unstable.svg)](https://packagist.org/packages/gpilla/php-owncloud-api) [![License](https://poser.pugx.org/gpilla/php-owncloud-api/license.svg)](https://packagist.org/packages/gpilla/php-owncloud-api)
 
 An object oriented API to consume from PHP. The idea of this API is to manage all the files

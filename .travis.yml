@@ -10,5 +10,5 @@ before_script:
   - composer install -dev
 
 script:
-  - ./vendor/bin/phpunit tests/
-  - ./vendor/bin/phpcs --standard=PSR1 --standard=PSR2 -np lib/
+  - ./vendor/bin/phpunit
+  - ./vendor/bin/phpcs --standard=PSR1 --standard=PSR2 -np src/
