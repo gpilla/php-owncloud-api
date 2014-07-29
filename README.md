@@ -9,6 +9,21 @@ download, upload and sharing.
 
 It is still on development, for now we only have this:
 
+* File Sharing
+ * Get all shared files and folders
+ * Get a shared filee
+ * Create a new share
+ * Delete a share
+
+The API was tested with Owncloud 6.*
+
+# Todo
+
+* Manage by webdav files, listings, download, upload, etc.
+* Create a object entity to manage the File.
+* Internationalization of message errors.
+* Test, test, test, test
+
 # Installation
 
 Through composer, simply run :
@@ -66,9 +81,3 @@ $api = new Api('http://somewhere.com', ['user', 'password']);
 // You should send the share ID as parameter
 $share = $api->fileSharing()->deleteShare(1);
 ```
-
-## TODO:
-
-* Manage by webdav files, listings, download, upload, etc.
-* Create a object entity to manage the File.
-* Internationalization of message errors.
