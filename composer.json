@@ -5,7 +5,7 @@
     "homepage" : "https://github.com/gpilla/php-owncloud-api",
     "license" : "BSD-3-Clause",
     "autoload": {
-        "psr-4": { "Owncloud\\": "lib/" }
+        "psr-4": { "Owncloud\\": "src/" }
     },
     "require": {
         "php"              : ">=5.4.0",
