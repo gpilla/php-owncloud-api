@@ -8,7 +8,7 @@ use GuzzleHttp\Message\Response;
 
 class FileSharingTest extends PHPUnit_Framework_TestCase
 {
-    protected $_client;
+    protected $_api;
 
     public function setUp()
     {
@@ -19,11 +19,13 @@ class FileSharingTest extends PHPUnit_Framework_TestCase
             return new Response(200);
         });
 
-        $this->_client = new Client(['adapter' => $mockAdapter]);
+        $this->_api = new Owncloud\Api('http://demo.com', ['foo', 'bar'], ['adapter' => $mockAdapter]);
     }
 
-    public function testExample()
+    public function testDeleteShare()
     {
-        $this->_client->get('/');
+        $fileSharing = $this->_api->fileSharing();
+
+        //$response = $fileSharing->deleteShare(1);
     }
 }
