@@ -9,6 +9,24 @@ download, upload and sharing.
 
 It is still on development, for now we only have this:
 
+# Installation
+
+Through composer, simply run :
+
+```bash
+$ php composer.phar require gpilla/php-owncloud-api:dev-master
+```
+
+```json
+// composer.json
+{
+    "require": {
+        "gpilla/php-owncloud-api": "dev-master"
+    }
+}
+```
+# Basic usage
+
 ## FileSharing
 
 ### Get all shares
