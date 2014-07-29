@@ -26,7 +26,8 @@ $shares = $api->fileSharing()->getAllShares();
 
 ```php
 $api = new Api('http://somewhere.com', ['user', 'password']);
-$share = $api->fileSharing()->getShare(1); // You should send the share ID as parameter
+// You should send the share ID as parameter
+$share = $api->fileSharing()->getShare(1);
 ```
 
 ### Create a new share
@@ -40,7 +41,8 @@ $share = $api->fileSharing()->createNewShare('path/to/file/or/folder', ['shareTy
 
 ```php
 $api = new Api('http://somewhere.com', ['user', 'password']);
-$share = $api->fileSharing()->deleteShare(1); // You should send the share ID as parameter
+// You should send the share ID as parameter
+$share = $api->fileSharing()->deleteShare(1);
 ```
 
 ## TODO:
