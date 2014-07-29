@@ -12,16 +12,6 @@ class FileManagementIntegrationTest extends PHPUnit_Framework_TestCase
         $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], $_SERVER['owncloud_user'], $_SERVER['owncloud_password']);
     }
 
-    public function testExample()
-    {
-        $expected = 'This is an example';
-        //$this->_api->fileManagement()->write('test/php-owncloud-api.txt', $expected);
-        $archivos = $this->_api->fileManagement()->listContents('test', true);
-        //var_dump($archivos);
-        //$actual = $this->_api->fileManagement()->read('php-owncloud-api.txt');
-        //$this->assertEquals($expected, $actual);
-    }
-
     /**
      * @group internet
      * @covers                   Owncloud\Api\FileManagement::update
