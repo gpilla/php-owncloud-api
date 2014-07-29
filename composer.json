@@ -1,0 +1,28 @@
+{
+    "name": "gpilla/php-owncloud-api",
+    "description" : "OwnCloud php API for file sharing, at least.",
+    "keywords" : [ "owncloud", "rest", "webdav", "file sharing" ],
+    "homepage" : "https://github.com/gpilla/php-owncloud-api",
+    "license" : "BSD-3-Clause",
+    "autoload": {
+        "psr-4": { "Owncloud\\": "lib/" }
+    },
+    "require": {
+        "php"              : ">=5.4.0",
+        "league/flysystem" : "0.5.*",
+	    "guzzlehttp/guzzle": "4.*",
+	    "sabre/dav"        : "2.*"
+    },
+    "require-dev" : {
+        "phpunit/phpunit"           : "*",
+        "squizlabs/php_codesniffer" : "*"
+    },
+    "authors" : [
+        {
+            "name" : "Gustavo Pilla",
+            "email" : "pilla.gustavo@gmail.com",
+            "homepage" : "http://gustavopilla.com",
+            "role" : "Developer"
+        }
+    ]
+}

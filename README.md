@@ -1,8 +1,9 @@
 # Object Oriented PHP Owncloud API (php-owncloud-api)
 
-An object oriented API to consume
+An object oriented API to consume from PHP. The idea of this API is to manage all the files
+download, upload and sharing.
 
-It is still on development, for now we only have
+It is still on development, for now we only have this:
 
 ## FileSharing
 
@@ -32,4 +33,3 @@ $share = $api->fileSharing()->createNewShare('path/to/file/or/folder', ['shareTy
 * Manage by webdav files, listings, download, upload, etc.
 * Create a object entity to manage the File.
 * Internationalization of message errors.
-
