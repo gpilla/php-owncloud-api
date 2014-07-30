@@ -52,7 +52,7 @@ Examples:
 ### Read a file
 
 ```php
-// as everytime instantiate the API
+// As everytime instantiate the API
 $api = new Owncloud\Api('http://host.foobar.com/', 'user', 'password');
 $api->fileManagement()->read('path/to/the/test/file.txt');
 ```
