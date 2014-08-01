@@ -61,8 +61,8 @@ class Response
      */
     public function getData()
     {
-        if (!$response->isOk()) {
-            throw new ResponseException($response->getErrorMessage());
+        if (!$this->isOk()) {
+            throw new ResponseException($this->getErrorMessage());
         }
         return $this->response['ocs']['data'];
     }
