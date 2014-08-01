@@ -33,7 +33,7 @@ class FileSharing
 
     public function getAllShares()
     {
-        $response = $this->client->get(
+        $response = $this->getClient()->get(
             $this->getFileSharingRestUrl(),
             ['debug' => $this->debug]
         );
@@ -48,7 +48,7 @@ class FileSharing
 
     public function getShare($shareId)
     {
-        $response = $this->client->get(
+        $response = $this->getClient()->get(
             "{$this->getFileSharingRestUrl()}/{$shareId}",
             ['debug' => $this->debug]
         );
@@ -70,7 +70,7 @@ class FileSharing
         foreach ($options as $option => $value) {
             $body .= "&{$option}={$value}";
         }
-        $response = $this->client->post(
+        $response = $this->getClient()->post(
             $this->getFileSharingRestUrl(),
             ['body' => $body]
         );
@@ -82,7 +82,7 @@ class FileSharing
 
     public function deleteShare($shareId)
     {
-        $response = $this->client->delete(
+        $response = $this->getClient()->delete(
             "{$this->getFileSharingRestUrl()}/{$shareId}",
             ['debug' => $this->debug]
         );
@@ -105,5 +105,10 @@ class FileSharing
     private function getFileSharingRestUrl()
     {
         return "/ocs/v1.php/apps/files_sharing/api/v{$this->version}/shares";
+    }
+
+    private function getClient()
+    {
+        return $this->client;
     }
 }
