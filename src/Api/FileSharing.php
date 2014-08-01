@@ -37,9 +37,6 @@ class FileSharing
             $this->getFileSharingRestUrl(),
             ['debug' => $this->debug]
         );
-        if (!$response->isOk()) {
-            throw new ResponseException($response->getErrorMessage());
-        }
 
         $response = $response->getData();
 
@@ -52,9 +49,6 @@ class FileSharing
             "{$this->getFileSharingRestUrl()}/{$shareId}",
             ['debug' => $this->debug]
         );
-        if (!$response->isOk()) {
-            throw new ResponseException($response->getErrorMessage());
-        }
 
         $data = $response->getData();
         if (!isset($data['element'])) {
@@ -74,9 +68,6 @@ class FileSharing
             $this->getFileSharingRestUrl(),
             ['body' => $body]
         );
-        if (!$response->isOk()) {
-            throw new ResponseException($response->getErrorMessage());
-        }
         return $response->getData();
     }
 
@@ -86,9 +77,6 @@ class FileSharing
             "{$this->getFileSharingRestUrl()}/{$shareId}",
             ['debug' => $this->debug]
         );
-        if (!$response->isOk()) {
-            throw new ResponseException($response->getErrorMessage());
-        }
         return $response->getData();
     }
 

@@ -54,8 +54,16 @@ class Response
         return $message;
     }
 
+    /**
+     * Returns the response data.
+     *
+     * Before returning the data, checks if the response is ok, if it not, the throw Exception.
+     */
     public function getData()
     {
+        if (!$response->isOk()) {
+            throw new ResponseException($response->getErrorMessage());
+        }
         return $this->response['ocs']['data'];
     }
 
