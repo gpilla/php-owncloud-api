@@ -102,6 +102,11 @@ class FileSharing
         $this->version = $version;
     }
 
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
     private function getFileSharingRestUrl()
     {
         return "/ocs/v1.php/apps/files_sharing/api/v{$this->version}/shares";
@@ -109,6 +114,9 @@ class FileSharing
 
     private function getClient()
     {
+        if (!isset($this->client)) {
+            throw new \Owncloud\ResponseException('The REST client is not set.');
+        }
         return $this->client;
     }
 }
