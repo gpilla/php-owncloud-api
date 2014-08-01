@@ -41,11 +41,24 @@ Or edit your composer.json:
     }
 }
 ```
+
+## For development
+
+```bash
+$ git clone https://github.com/gpilla/php-owncloud-api.git
+$ cd php-owncloud-api
+$ php composer.phar install --dev
+```
+
+In the contrib folder there is a hook for checking phpunit and phpcs before commiting.
+
 # Basic usage
 
 ## FileManagement
 
 Is based on league/flysystem and the API is here: http://flysystem.thephpleague.com/api/
+
+(It will be changed)
 
 Examples:
 
