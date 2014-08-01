@@ -27,14 +27,14 @@ class FileManagementIntegrationTest extends PHPUnit_Framework_TestCase
      * @group internet
      * @covers                   Owncloud\Api\FileManagement::write
      */
-    public function testWrite()
+    /*public function testWrite()
     {
         $expected = 'Example random number :'.rand(0, 15000);
 
         $this->_api->fileManagement()->write('test/file.txt', $expected);
         $actual = $this->_api->fileManagement()->read('test/file.txt');
         $this->assertEquals($expected, $actual);
-    }
+    }*/
 
     /**
      * @group internet

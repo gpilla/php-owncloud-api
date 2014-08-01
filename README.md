@@ -11,7 +11,7 @@ It is still on development, for now we only have this:
 
 * File Sharing
  * Get all shared files and folders
- * Get a shared filee
+ * Get a shared file
  * Create a new share
  * Delete a share
 

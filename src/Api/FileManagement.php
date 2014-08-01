@@ -2,6 +2,9 @@
 
 namespace Owncloud\Api;
 
+/**
+ * @author Gustavo Pilla <pilla.gustavo@gmail.com>
+ */
 class FileManagement extends \League\Flysystem\Filesystem
 {
 
