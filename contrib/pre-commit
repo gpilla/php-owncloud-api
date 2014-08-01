@@ -1,0 +1,51 @@
+#!/usr/bin/php
+<?php
+
+$projectName = basename(getcwd());
+
+// Tell the commiter what the hook is doing
+echo PHP_EOL;
+echo '+ Starting pre-commit unit testing'.PHP_EOL;
+
+exec('vendor/bin/phpunit', $output, $returnCode);
+
+if ($returnCode !== 0) {
+  $minimalTestSummary = array_pop($output);
+  printf("+ Test suite for %s \033[41mFAILED\033[0m : ", $projectName);
+  printf("( %s ) %s%2\$s", $minimalTestSummary, PHP_EOL);
+  printf("ABORTING COMMIT!\n");
+  exit(1);
+}
+
+echo "+ Test suite for $projectName \033[42mPASSED\033[0m.".PHP_EOL;
+
+// ---
+// PHPCS check
+// ---
+exec('git diff --name-only --cached --diff-filter=ACMR src/', $phpcs_files );
+
+printf("+ Starting pre-commit PSR1 and PSR2 check (%s file/s to be checked) %s", count($phpcs_files) , PHP_EOL);
+
+
+$files = '';
+foreach($phpcs_files as $file) {
+    $files .= " $file";
+}
+$output = '';
+exec("vendor/bin/phpcs --standard=PSR1 --standard=PSR2 -np $files", $output, $returnCode);
+
+
+
+if ($returnCode !== 0) {
+    echo "+ PSR1 and PSR2 check \033[41mFAILED\033[0m".PHP_EOL;
+    foreach($output as $line) {
+        echo $line.PHP_EOL;
+    }
+    exit(1);
+}
+
+echo "+ PSR1 and PSR2 check for $projectName \033[42mPASSED\033[0m.".PHP_EOL;
+echo PHP_EOL;
+echo '+ Everything OK, ready to commit. Well done!'.PHP_EOL;
+echo PHP_EOL;
+exit(0);
