@@ -97,7 +97,7 @@ class FileSharing
 
     private function getFileSharingRestUrl()
     {
-        return "/ocs/v1.php/apps/files_sharing/api/v{$this->version}/shares";
+        return "ocs/v1.php/apps/files_sharing/api/v{$this->version}/shares";
     }
 
     private function getClient()
