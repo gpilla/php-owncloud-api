@@ -20,10 +20,10 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
         $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], $_SERVER['owncloud_user'], $_SERVER['owncloud_password']);
     }
 
-    public function createAndGetShareId()
+    public function createAndGetShareId($filename)
     {
         // In case of integration test, de file test.txt should existe in the root of the filesystem
-        $response = $this->_api->fileSharing()->createNewShare('test.txt', ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
+        $response = $this->_api->fileSharing()->createNewShare($filename, ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
         return $response['id'];
     }
 
@@ -33,7 +33,8 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateNewShare()
     {
-        $response = $this->_api->fileSharing()->createNewShare('test', ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
+        $filename = $this->getTestFilename();
+        $response = $this->_api->fileSharing()->createNewShare($filename, ['shareType' => FileSharing::SHARE_TYPE_PUBLIC_LINK]);
 
         $this->assertArrayHasKey('id', $response);
         $this->assertArrayHasKey('url', $response);
@@ -57,7 +58,8 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
      */
     public function testGetShare()
     {
-        $shareId = $this->createAndGetShareId();
+        $filename = $this->getTestFilename();
+        $shareId = $this->createAndGetShareId($filename);
 
         $response = $this->_api->fileSharing()->getShare($shareId);
 
@@ -65,7 +67,6 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('path', $response);
         $this->assertArrayHasKey('token', $response);
         $this->assertArrayHasKey('item_type', $response);
-        $this->assertCount(16, $response);
     }
 
     /**
@@ -84,7 +85,8 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAllShares()
     {
-        $this->createAndGetShareId(); // We create at least one.
+        $filename = $this->getTestFilename();
+        $this->createAndGetShareId($filename); // We create at least one.
 
         $response = $this->_api->fileSharing()->getAllShares();
 
@@ -97,7 +99,8 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
      */
     public function testDeleteShare()
     {
-        $shareId = $this->createAndGetShareId(); // We create at least one.
+        $filename = $this->getTestFilename();
+        $shareId = $this->createAndGetShareId($filename); // We create at least one.
 
         $response = $this->_api->fileSharing()->deleteShare($shareId);
         $this->assertCount(0, $response);
@@ -113,5 +116,11 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
         $fileSharing = $this->_api->fileSharing();
 
         $response = $fileSharing->deleteShare(10000);
+    }
+
+    public function getTestFilename()
+    {
+        $filename = 'php-owncloud-api/existing_file.txt';
+        return $filename;
     }
 }
