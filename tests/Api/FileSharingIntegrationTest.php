@@ -17,7 +17,12 @@ class FileSharingIntegrationTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], $_SERVER['owncloud_user'], $_SERVER['owncloud_password']);
+        if ( getenv('owncloud_host') != '' ) {
+          $this->_api = new Owncloud\Api(getenv('owncloud_host'), getenv('owncloud_user'), getenv('owncloud_password'));
+        } else {
+          $this->_api = new Owncloud\Api($_SERVER['owncloud_host'], $_SERVER['owncloud_user'], $_SERVER['owncloud_password']);
+        }
+        $this->_api->fileSharing()->setDebug(true);
     }
 
     public function createAndGetShareId($filename)
