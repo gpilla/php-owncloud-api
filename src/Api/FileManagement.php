@@ -15,7 +15,7 @@ class FileManagement extends \League\Flysystem\Filesystem
         $settings['password'] = $password;
 
         $client = new \Sabre\DAV\Client($settings);
-        $adapter = new \League\Flysystem\Adapter\WebDav($client, '/remote.php/webdav/');
+        $adapter = new \League\Flysystem\Adapter\WebDav($client, 'remote.php/webdav/');
 
         parent::__construct($adapter);
     }
