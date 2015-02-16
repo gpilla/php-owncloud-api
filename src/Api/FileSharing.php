@@ -60,14 +60,12 @@ class FileSharing
 
     public function createNewShare($path, $options)
     {
-        $body = "path=$path";
-        foreach ($options as $option => $value) {
-            $body .= "&{$option}={$value}";
-        }
+        $options['path'] = $path;
         $response = $this->getClient()->post(
             $this->getFileSharingRestUrl(),
-            ['body' => $body]
+            ['body' => $options, 'debug' => $this->debug]
         );
+
         return $response->getData();
     }
 
