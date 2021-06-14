@@ -14,6 +14,11 @@ class Api
      */
     private $fileManagementConfig;
 
+    /**
+     * @var Api\FileManagement
+     */
+    private $fileManagement;
+
     public function __construct($host, $username, $password, $config = array())
     {
         $this->host = $host;
@@ -32,8 +37,35 @@ class Api
         return new Api\FileSharing($this->client);
     }
 
-    public function fileManagement()
+    public function fileManagement(): Api\FileManagement
     {
-        return new Api\FileManagement($this->host, $this->username, $this->password,$this->fileManagementConfig);
+        if($this->fileManagement){
+            return $this->fileManagement;
+        }
+        return $this->fileManagement = new Api\FileManagement($this->host, $this->username, $this->password, $this->fileManagementConfig);
+
     }
+
+    public function listContents(string $path): array
+    {
+        return $this->fileManagement()->listContents($path);
+    }
+
+    /**
+     * @throws \League\Flysystem\FileNotFoundException
+     */
+    public function delete(string $filePath): bool
+    {
+        return $this->fileManagement()->delete($filePath);
+    }
+
+    public function getFileContent(string $filePath)
+    {
+        if($handler =  $this->fileManagement()->get($filePath)){
+            return $handler->read();
+        }
+        return '';
+
+    }
+
 }
