@@ -51,6 +51,11 @@ class Api
         return $this->fileManagement()->listContents($path);
     }
 
+    public function has(string $path): bool
+    {
+        return $this->fileManagement()->has($path);
+    }
+
     /**
      * @throws \League\Flysystem\FileNotFoundException
      */
