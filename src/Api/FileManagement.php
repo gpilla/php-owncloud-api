@@ -12,17 +12,38 @@ use Sabre\DAV\Client;
 class FileManagement extends Filesystem
 {
 
-    public function __construct($host, $username, $password, $settings = array())
+    /**
+     * @param $host string
+     * @param $username string
+     * @param $password string
+     * @param $settings array ['curlSettings' => [],'pathRemoteWebDav' => 'wweebb']
+     */
+    public function __construct(
+        $host,
+        $username,
+        $password,
+        $settings = array()
+    )
     {
         $settings['baseUri'] = $host;
         $settings['userName'] = $username;
         $settings['password'] = $password;
 
         $client = new Client($settings);
-        foreach($settings['curlSettings'] as $curlSettingName => $curlSettingValue) {
-            $client->addCurlSetting($curlSettingName, $curlSettingValue);
+
+        /** load curl settings */
+        if (isset($settings['curlSettings'])) {
+            foreach ($settings['curlSettings'] as $curlSettingName => $curlSettingValue) {
+                $client->addCurlSetting($curlSettingName, $curlSettingValue);
+            }
         }
-        $adapter = new WebDav($client, 'remote.php/webdav/');
+
+        /** set from setting WebDav path */
+        if (isset($settings['pathRemoteWebDav'])) {
+            $adapter = new WebDav($client, $settings['pathRemoteWebDav']);
+        } else {
+            $adapter = new WebDav($client, 'remote.php/webdav/');
+        }
 
         parent::__construct($adapter);
     }
